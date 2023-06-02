@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chaos Insurgency Management</title>
+    
+</head>
+<style>
+    body {
+
+    
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        
+        height: 100vh;
+        width: 100vw;
+        
+        overflow: hidden;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        width: 300px;
+        height: 300px;
+
+        background-color: #f6f6f6;
+
+        border: none;
+        border-radius: 5px;
+
+        transition: all .3s ease-in-out;
+
+        margin: 10px;
+    }
+
+    button:hover {
+        background-color: #e6e6e6;
+        cursor: pointer;
+    }
+
+</style>
+<body>
+
+
+    
+    <button id="finance">
+        <p>FINANCE</p>
+    </button>
+    <button id="storage">
+        <p>STORAGE</p>
+    </button>
+    <button id="upgrades">
+        <p>UPGRADES</p>
+    </button>
+
+    <!-- SCRIPT FOR BUTTONS -->
+    <script>
+
+        let finance = document.getElementById("finance");
+            
+        let storage = document.getElementById("storage");
+
+        let upgrades = document.getElementById("upgrades");
+
+        finance.addEventListener("click", () => {
+            window.location.href = "ADMINISTRATION/FINANCE.html";
+        })
+
+        storage.addEventListener("click", () => {
+            window.location.href = "ADMINISTRATION/STORAGE.html";
+        })
+
+        upgrades.addEventListener("click", () => {
+            window.location.href = "ADMINISTRATION/UPGRADES.html";
+        })
+
+    </script>
+
+    <!-- AUTH SCRIPT + USER DATA RETURN-->
+    <script>
+    
+	    // Note: This example uses the implicit grant flow (https://discordjs.guide/oauth2/#implicit-grant-flow), so make sure you use `response_type=token` here 
+        
+		function generateRandomString() {
+			let randomString = '';
+			const randomNumber = Math.floor(Math.random() * 10);
+
+			for (let i = 0; i < 20 + randomNumber; i++) {
+				randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+			}
+
+			return randomString;
+		}
+
+		window.onload = () => {
+
+            // FRAHMENT THE URI
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
+			const [accessToken, tokenType, state] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get('state')];
+
+            // LOG OUTPUT !ONLY FOR DEBUGGING!
+
+            //console.log(fragment.get('access_token'));
+            //console.log(fragment.get('token_type'));
+            //console.log(fragment.get('state'));
+
+            // CHECK IF THERE IS ACCESS TOKEN, ELSE REDIRECT TO AUTH
+			if (!accessToken) {
+				const randomString = generateRandomString();
+				localStorage.setItem('oauth-state', randomString);
+
+				return document.location.href = `http://localhost:53134/&state=${encodeURIComponent(btoa(randomString))}`; 
+			}
+
+            // USER INFO GRAB
+			fetch('https://discord.com/api/users/@me', {
+				headers: {
+					authorization: `${tokenType} ${accessToken}`,
+				},
+			})
+				.then(result => result.json())
+				.then(response => {
+					const { username, discriminator } = response;
+
+                    let obj = {
+                        username: username,
+                        discriminator: discriminator
+                    }
+
+                    console.log(`User: ${username}#${discriminator}`)
+                    localStorage.setItem('userInfo', JSON.stringify(obj));
+				})
+				.catch(console.error);
+
+                
+                
+                // GUILD MEMBER INFO GRAB
+                const guildId = '757597940171669594';
+                
+                fetch(`https://discord.com/api/users/@me/guilds/${guildId}/member`, {
+                headers: {
+                        authorization: `${tokenType} ${accessToken}`,
+                    },
+                })
+                    .then(result => result.json())
+                    .then(response => {
+        
+                        localStorage.setItem('guildInfo', response);
+        
+                        var roles = [];
+
+                        // CHECK IF USER HAS ROLES AND PUSH THEM TO ARRAY
+                        if (response.roles.length == 0) {
+                            console.log("auth: unauthorized")
+                            return localStorage.setItem('auth', `unauthorized`);
+                        } else {
+                            for (let role of response.roles) {
+                                roles.push(role);
+                            }
+                        }
+                        
+                        // CHECK IF USER IS ELIGIBLE FOR PERMISSION
+                        for (i = 0; i < roles.length; i++) {
+                            if (roles[i] === "1114272700513394789") {
+
+                                console.log("auth: authorized")
+                                console.log(`role: ${roles[i]}`)
+
+                                localStorage.setItem('auth', `authorized`);
+                                localStorage.setItem('role', `${roles[i]}`);
+                                return;
+                            } else {
+                                return localStorage.setItem('auth', `unauthorized`);
+                            } 
+                        }
+                    })
+                    .catch(console.error);
+		}
+
+		
+	</script>
+</body>
+</html>

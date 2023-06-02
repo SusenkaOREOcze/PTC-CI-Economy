@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Chaos Insurgency Management</title>
+    
+</head>
+<style>
+    body {
+        background-image: url('https://i.redd.it/x4esim9lgly41.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        
+        height: 100vh;
+        width: 100vw;
+        
+        overflow: hidden;
+    }
+
+    .authDialog {
+        display: block;
+
+        background-color: #2C2F33;
+        border-radius: 10px;
+        border: none;
+
+        width: 300px;
+        height: 320px;
+
+        box-shadow: 0px 0px 4px #323438;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        transform: translateY(50%);
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto;
+        margin-top: 50px;
+        width: 200px;
+        height: 200px;
+
+        background-color: #f6f6f6;
+
+        border-radius: 50%;
+
+        padding: 5px;
+    }
+
+    .auth {
+        text-decoration: none;
+        background-color: #7289DA;
+        width: fit-content;
+        height: fit-content;
+
+        border-radius: 5px;
+        padding: 5px 20px;
+
+        color: #f6f6f6;
+        font-style: oblique;
+    }
+
+    .auth:hover {
+        background-color: #677bc4;
+    }
+
+</style>
+<body>
+
+    <dialog class="authDialog" id="authDialog">
+        <img class="logo" src="https://fondationscp.wdfiles.com/local--files/chaos-insurgency-hub/ic1.png">
+        <a class="auth" id="login" href="https://discord.com/api/oauth2/authorize?client_id=1113139508502859868&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2Fmain&response_type=token&scope=identify%20guilds.members.read">Authenticate</a>
+    </dialog>
+
+    <script>
+        window.onload = () => {
+            const fragment = new URLSearchParams(window.location.hash.slice(1));
+			const state = fragment.get('state');
+
+            if (state) {
+                document.getElementById('login').href += `&state=${state}`;
+                return document.getElementById('login').style.display = 'block';    
+            }
+				
+			if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
+				return console.log('You may have been click-jacked!');
+			}
+        }
+    </script>
+</body>
+</html>
