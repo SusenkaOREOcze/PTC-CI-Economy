@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>UPGRADES</title>
-        </head>
+<head>
+	<title>Chaos Insurgency Management</title>
+    
+</head>
 <style>
 
     :root {
@@ -16,7 +13,6 @@
 
         --primary-button: #202320;
         --secondary-button: #1a1d1a;
-        --selected-button: #309630;
 
         --primary-accent: #309630;
 
@@ -158,13 +154,6 @@
 
 
     /* END OF STYLING THE MAIN STRUCTURE */ 
-
-    .selectedBTN {
-        background-color: var(--selected-button) !important;
-    }
-    .selectedBTN:hover {
-        background-color: var(--selected-button) !important;
-    }
 </style>
 <body>
     <script>
@@ -193,60 +182,6 @@
 
 
     </section>
-
-    <!-- NAVIGATION -->
-    <script>
-        window.onload = () => {
-            // CHECK STATE
-            const fragment = new URLSearchParams(window.location.hash.slice(1));
-			const [state, tokenType, accessToken] = [fragment.get('state'), fragment.get('token_type'), fragment.get('access_token')];
-
-				
-			if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
-			    console.log('You may have been click-jacked!');
-                return document.location.href = 'http://localhost:53134/';
-			}
-
-            // SET ROUTES
-
-            let finance = document.getElementById("finance");
-        
-            let storage = document.getElementById("storage");
-
-            let upgrades = document.getElementById("upgrades");
-
-            finance.addEventListener("click", () => {
-                window.location.href = `http://localhost:53134/ADMINISTRATION/FINANCE.html#state=${state}`;
-            })
-
-            storage.addEventListener("click", () => {
-                window.location.href = `http://localhost:53134/ADMINISTRATION/STORAGE.html#state=${state}`;
-            })
-
-            upgrades.addEventListener("click", () => {
-                window.location.href = `http://localhost:53134/ADMINISTRATION/UPGRADES.html#state=${state}`;
-            })
-
-            // USER
-
-            let base = document.getElementById("base");
-
-            base.addEventListener("click", () => {
-                window.location.href = `http://localhost:53134/main#state=${state}`;
-            })
-        }
-
-        let guildInfo = JSON.parse(localStorage.getItem('guildInfo'));
-        let { user } = guildInfo;
-        let { id, avatar } = user;
-
-        let userimg = document.getElementById("userimg");
-        let = userName = document.getElementById("username");
-
-        userName.innerHTML = `${user.username}#${user.discriminator}`;
-        userimg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
-    </script>
-
     <!-- NAV LINKS -->
     <nav>
         <button id="finance">
@@ -255,7 +190,7 @@
         <button id="storage">
             STORAGE
         </button>
-        <button id="upgrades" class="selectedBTN">
+        <button id="upgrades">
             UPGRADES
         </button>
         <button id="logout">

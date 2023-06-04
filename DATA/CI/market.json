@@ -1,0 +1,50 @@
+{
+    "weapons": {
+        "COM15": 500,
+        "COM18": 800,
+        "MP7": 1500,
+        "Vector": 2500,
+        "E-11": 3500,
+        "Kulomet": 4500,
+        "Brokovnice": 300,
+        "Revolver": 1200,
+        "Micro H. I. D.": 10000,
+        "3-X Particle Disruptor": 15000
+    },
+    "healing": {
+        "Prášky": 100,
+        "Lékárnička": 200,
+        "Adrenaline": 250
+    },
+    "equipment": {
+        "Combat Vesta": 750,
+        "Heavy Vesta": 1000,
+        "Hacking Device": 3000,
+        "Flash granade": 500,
+        "Granát": 600,
+        "Light vesta": 500
+    },
+    "special": {
+        "EMP Rušička, na zónu": 10000,
+        "Transport, Auto": 10000,
+        "Transport, Dodávka": 20000,
+        "C4": 1000,
+        "Assault, 4 lidí, přeprava Humvee": 12000,
+        "Assault, 6 lidí, přeprava Dodávkou": 18000,
+        "Assault, 8+ lidí, přeprava Kamiónem/Konvojem: Za každého člena": 2500,
+        "Maintenance Upkeep (za každé vozidlo a za každou akci)": 2500,
+        "Emp Granát (Ghostlight)": 4000,
+        "Svářečka (Baterka)": 2500
+    },
+    "misc": {
+        "Baterka": 75,
+        "Vysílačka": 200
+    },
+    "foundation cards": {
+        "Karta nadace, level 1": 500,
+        "Karta nadace, level 2": 1000,
+        "Karta nadace, level 3": 2500,
+        "Karta nadace, level 4": 5000,
+        "Karta nadace, level 5": 10000
+    }
+}

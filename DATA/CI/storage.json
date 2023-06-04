@@ -1,0 +1,31 @@
+{
+    "weapons": {
+        "COM15": 3,
+        "COM18": 3,
+        "MP7": 4,
+        "Vector": 7,
+        "E-11": 12,
+        "Kulomet": 2,
+        "Brokovnice": 2,
+        "Revolver": 3
+    },
+    "healing": {
+        "Prášky": 15,
+        "Lékárnička": 10,
+        "Adrenaline": 5
+    },
+    "equipment": {
+        "Combat Vesta": 14,
+        "Heavy Vesta": 4,
+        "Hacking Device": 14,
+        "Flash granade": 10,
+        "Granát": 9
+    },
+    "special": {
+        "EMP Rušička": 1,
+        "C4": 3,
+        "nepřátelská Vysílačka": 4,
+        "3-X Particle Disruptor": 0,
+        "Micro H. I. D.": 0
+    }
+}

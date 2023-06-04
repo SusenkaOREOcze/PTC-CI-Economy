@@ -83,14 +83,37 @@
     </dialog>
 
     <script>
+        function generateRandomString() {
+			let randomString = '';
+			const randomNumber = Math.floor(Math.random() * 10);
+
+			for (let i = 0; i < 20 + randomNumber; i++) {
+				randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+			}
+
+			return randomString;
+		}
+
         window.onload = () => {
-            const fragment = new URLSearchParams(window.location.hash.slice(1));
+            localStorage.clear();
+
+
+             // FRAGMENT THE URI
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
 			const state = fragment.get('state');
 
-            if (state) {
+            
+            if(!state) {
+                const randomString = generateRandomString();
+                localStorage.setItem('oauth-state', randomString);
+
+                document.getElementById('login').href += `&state=${encodeURIComponent(btoa(randomString))}`;
+                return;  
+			} else {
                 document.getElementById('login').href += `&state=${state}`;
-                return document.getElementById('login').style.display = 'block';    
+                return;    
             }
+
 				
 			if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
 				return console.log('You may have been click-jacked!');

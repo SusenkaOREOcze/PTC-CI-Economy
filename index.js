@@ -1,8 +1,19 @@
 const { request } = require('undici');
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const { clientId, clientSecret, port } = require('./config.json');
 
+const fs = require("fs");
+const { error } = require('console');
+
 const app = express();
+
+app.use(cors());
+
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // AUTHORIZATION VIA DISCORD
 app.get('/', async ({ query }, response) => {
@@ -45,10 +56,19 @@ app.get('/', async ({ query }, response) => {
 });
 
 // MAIN ROUTE
-
 app.get('/main', ({ query }, response) => {
 	return response.sendFile('main.html', { root: './public' });
 });
+
+// API CALLS
+
+app.post('/API/GET', (request, response) => {
+	fs.readFile(`./DATA/${request.body.faction}/${request.body.file}`, (err, data) => {
+		if (err) throw err;
+		response.send(data);
+	})
+})
+
 
 // START APP ON PORT AND SERVER FILES IN FOLDER: PUBLIC
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`));

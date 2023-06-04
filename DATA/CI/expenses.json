@@ -1,0 +1,105 @@
+{
+    "Death of personnel": {
+        "cost": 1000,
+
+        "assault-engineer": {
+            "E-11": 1,
+            "CHD": 1,
+            "medkit": 1,
+            "granade": 1,
+            "C4": 2,
+            "welder": 1,
+            "combat armor": 1
+        },
+        "assault-commander": {
+            "E-11": 1,
+            "CHD": 1,
+            "medkit": 1,
+            "adrenaline": 1,
+            "painkillers": 1,
+            "granade": 1,
+            "heavy armor": 1
+        },
+        "assault-machinegunner": {
+            "logicer": 1,
+            "CHD": 1,
+            "medkit": 1,
+            "adrenaline": 1,
+            "granade": 1,
+            "heavy armor": 1
+        },
+        "assault-shotgunner": {
+            "shotgun": 1,
+            "revolver": 1,
+            "CHD": 1,
+            "medkit": 1,
+            "adrenaline": 1,
+            "granade": 1,
+            "cpmbat armor": 1
+        },
+        "assault-rifleman": {
+            "E-11": 1,
+            "CHD": 1,
+            "medkit": 1,
+            "painkillers": 1,
+            "granade": 1,
+            "combat armor": 1
+        },
+        "assault-medic": {
+            "vector": 1,
+            "CHD": 1,
+            "medkit": 2,
+            "adrenaline": 1,
+            "painkillers": 2,
+            "combat armor": 1
+        },
+        "assault-runner": {
+            "vector": 1,
+            "CHD": 1,
+            "medkit": 2,
+            "adrenaline": 1,
+            "flashbang": 1,
+            "light armor": 1
+        },
+        "assault-breacher": {
+            "vector": 1,
+            "CHD": 1,
+            "medkit": 1,
+            "adrenaline": 1,
+            "flashbang": 3,
+            "combat armor": 1
+        }
+    },
+    
+    "Basic procedures and special functions": {
+        "Chaos Insurgency AI": 7500,
+        "Výplata": 500,
+        "Údržba vozidel": 2500,
+        "Transport: Auto": 10000,
+        "Transport: Dodávka": 20000,
+        "Assault: 1-4 - přeprava Humvee": 12000,
+        "Assault: 6 - přeprava Dodávkou": 18000,
+        "Assault: 8+ - přeprava Kamiónem/Konvojem - za každého člena": 2500
+    },
+
+    "Leak of information from captured personnel": {
+        "alpha": 1000,
+        "beta": 2500,
+        "gama": 5000,
+        "delta": 15000
+    },
+
+    "Infiltration of foundation personnel" : {
+        "lvl-1": 2000,
+        "lvl-2": 4000,
+        "lvl-3": 12000,
+        "lvl-4": 20000
+    },
+
+    "Smuggle of items/object in to facility": {
+        "LCZ-S": 1000,
+        "LCZ-L": 5000,
+        "HCZ-S": 2000,
+        "HCZ-L": 10000
+    }
+}
