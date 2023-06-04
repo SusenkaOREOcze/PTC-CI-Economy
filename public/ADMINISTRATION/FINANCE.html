@@ -6,6 +6,7 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>FINANCE</title>
+            <script src="../JS/expenses-listing.js"></script>
         </head>
 <style>
 
@@ -405,13 +406,25 @@
                 outline: none;
 
                 box-shadow: 0px 0px 7px var(--tertiary-color);  
+
+                
             }
+
+            #financeModal::-webkit-scrollbar {
+                width: 0px;
+            }
+
             #financeModal::backdrop  {
                 background-color: #191c1950;
             }
 
-            tr[data-item] {
-                cursor: pointer;
+            .selected {
+                background-color: #79ff79a2;
+            }
+        
+            .priceless {
+                color: transparent;
+                user-select: none;
             }
         </style>
         <script>
@@ -469,71 +482,14 @@
                     }).then(res => res.json())
                     .then(data => {
                         expensesData = data;
-                        buildTable(data);
+                        generateTable(data);
                         financeModal.showModal();
                     })
                     .catch(err => console.log(err));
             })
         </script>
         <script>
-            var selection = [];
-            var total = 0;
-
-            function buildTable(data) {
-
-                let table = document.getElementById('financeModal');
-                
-                for (var category in data) {
-                    let row = document.createElement('tr');
-                    row.innerText = category;
-                    row.className = 'bold';
-                    
-                    table.appendChild(row);
-
-                    for (let item in data[category]) {
-                        let cell = document.createElement('tr');
-                        cell.style.fontWeight = 'normal';
-                        cell.className = 'cell';
-                        cell.dataset = 'data-item';
-                        let cellText = document.createTextNode(`${item}: ${data[category][item]}`);
-                        cell.dataset.item = item;
-                        if (category == 'death') {
-                            cell.dataset.value = item;    
-                        }
-                        cell.dataset.value = data[category][item];
-                        cell.dataset.clicked = 0;
-
-                        cell.appendChild(cellText);
-                        table.appendChild(cell);
-
-                        cell.addEventListener('click', (e) => {
-                            
-                            switch (e.target.dataset.clicked) {
-                                case '0':
-                                    e.target.style.backgroundColor = 'var(--primary-accent)';
-                                    e.target.style.color = 'black';
-                                    e.target.style.fontWeight = 'bold';
-                                    selection.push({
-                                        item: e.target.dataset.item,
-                                        value: Number(e.target.dataset.value)
-                                    });
-                                    total = Number(total) + Number(e.target.dataset.value);
-                                    e.target.dataset.clicked = 1;
-                                    break;
-                                case '1':
-                                    e.target.style.backgroundColor = 'var(--tertiary-color)';
-                                    e.target.style.color = 'var(--primary-text)';
-                                    selection.splice(selection.indexOf(e.target.dataset.item), 1);
-                                    total = Number(total) - Number(e.target.dataset.value);
-                                    e.target.dataset.clicked = 0;
-                                    break;
-                            }
-
-                            console.log(total)
-                        });
-                    }
-                }
-            }
+            console.log(Selection)
         </script>
     </main>
 
