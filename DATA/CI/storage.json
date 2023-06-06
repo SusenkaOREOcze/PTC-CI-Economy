@@ -1,5 +1,5 @@
 {
-    "weapons": {
+    "Zbraně": {
         "COM15": 3,
         "COM18": 3,
         "MP7": 4,
@@ -9,23 +9,39 @@
         "Brokovnice": 2,
         "Revolver": 3
     },
-    "healing": {
+    "Léčiva": {
         "Prášky": 15,
         "Lékárnička": 10,
         "Adrenaline": 5
     },
-    "equipment": {
+    "Vybavení": {
         "Combat Vesta": 14,
         "Heavy Vesta": 4,
         "Hacking Device": 14,
         "Flash granade": 10,
         "Granát": 9
     },
-    "special": {
+    "Speciální": {
         "EMP Rušička": 1,
         "C4": 3,
         "nepřátelská Vysílačka": 4,
         "3-X Particle Disruptor": 0,
         "Micro H. I. D.": 0
+    },
+    "Zkonfiskovaná SCP": {
+        "SCP - 018 (Míček)": 1,
+        "SCP - 207 (Coca Cola)": 1,
+        "SCP - 244 (Baba, Děda)": 0,
+        "SCP - 268 (Čapka)": 2,
+        "SCP - 500 (Insta heal)": 3,
+        "SCP - 1576 (Gramofon)": 0,
+        "SCP - 1853 (Ability enhc.)": 2,
+        "SCP - 2176 (Ghost Light)": 0,
+        "SCP - 008 (covid 2023)": 0,
+        "SCP - 939 (Hafo)": 1,
+        "SCP - 049 (Doktůrek)": 1,
+        "SCP - 106 (Black man)": 0,
+        "SCP - 096 (Shaggy)": 0,
+        "SCP - 173 (Oříšek)": 0
     }
 }

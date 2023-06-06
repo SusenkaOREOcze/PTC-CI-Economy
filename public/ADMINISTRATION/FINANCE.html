@@ -7,6 +7,12 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>FINANCE</title>
             <script src="../JS/expenses-listing.js"></script>
+            <script src="../JS/submitFinance.js"></script>
+
+            <script>
+                var incomeData;
+                var expenseData;
+            </script>
         </head>
 <style>
 
@@ -20,8 +26,9 @@
         --selected-button: #309630;
 
         --primary-accent: #309630;
+        --secondary-accent: #2e972e;
 
-        --primary-text: #e8e8e8;
+        --primary-text: #d2d2d2;
     }
 
 
@@ -176,7 +183,7 @@
 <body>
     <script>
         let body = document.querySelector('body');
-    
+        
         body.style.width = `${window.innerWidth}px`;
         body.style.height = `${window.innerHeight}px`;
     </script>
@@ -187,7 +194,7 @@
             <p id="username">null</p>
         </div>
         <span id="spacer">
-
+            
         </span>
         <div id="base">
             <img id="baseimg" src="http://localhost:53134/img/Chaos_Insurgency.PNG">
@@ -196,13 +203,80 @@
     </header>
     <!-- BASIC INFO -->
     <section>
-        
+        <style>
+            section {
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
 
+                width: 100%;
+            }
 
+            #balance {
+                color: var(--primary-text);
+                font-size: 40px;
+                font-weight: 100;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+
+                justify-self: self-start;
+
+                margin-left: 50px;
+
+            }
+
+            #balance::before {
+                content: "Balance: ";
+            }
+
+            #finalizeData {
+
+                width: 230px;
+                height: 50px;
+                transition: all .12s ease-in-out;
+
+                margin-right: 25px;
+                margin-left: auto;
+
+                border-radius: 5px;
+                
+                font-size: 20px;
+                font-weight: 600;
+
+                background-color: transparent;
+                border: solid 1px #2a802a2f;
+                color: #ffffffaf;
+                outline: none;
+
+                box-shadow: 0px 0px 5px #27772706;
+            }
+
+            #finalizeData:hover {
+                color: var(--primary-text);
+                background-color: #15181558;
+                border: solid 1px #2a802a68;
+                cursor: pointer;
+            }
+
+            
+        </style>
+        <h1 id="balance">
+            361 000 $
+        </h1>
+
+        <button id="finalizeData">
+            Finalize
+        </button>
+        <script>
+
+        </script>
     </section>
-
+    
     <!-- NAVIGATION -->
     <script>
+
         window.onload = () => {
             // CHECK STATE
             const fragment = new URLSearchParams(window.location.hash.slice(1));
@@ -240,6 +314,51 @@
             base.addEventListener("click", () => {
                 window.location.href = `http://localhost:53134/main#state=${state}`;
             })
+
+            
+            // GET ECNONOMY DATA
+            
+            fetch('http://localhost:53134/API/GET',
+                {   
+                    mode: "cors", // no-cors, *cors, same-origin
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                        Accept: 'application.json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST' ,
+                    body: JSON.stringify({
+                        faction: faction,
+                        file: 'revenue.json'
+                    }) 
+                }).then(res => res.json())
+                .then(data => {
+                    incomeData = 0;
+                    if (!data) return;
+                    incomeData = data;
+                })
+                .catch(err => console.log(err));
+
+            fetch('http://localhost:53134/API/GET',
+                {   
+                    mode: "cors", // no-cors, *cors, same-origin
+                    credentials: "same-origin", // include, *same-origin, omit
+                    headers: {
+                        Accept: 'application.json',
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST' ,
+                    body: JSON.stringify({
+                        faction: faction,
+                        file: 'expenses.json'
+                    }) 
+                }).then(res => res.json())
+                .then(data => {
+                    expenseData = 0;
+                    if (!data) return;
+                    expenseData = data;
+                })
+                .catch(err => console.log(err));
         }
 
         let guildInfo = JSON.parse(localStorage.getItem('guildInfo'));
@@ -249,7 +368,7 @@
         let userimg = document.getElementById("userimg");
         let = userName = document.getElementById("username");
 
-        userName.innerHTML = `${user.username}#${user.discriminator}`;
+        userName.textContent = `${user.username}#${user.discriminator}`;
         userimg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
     </script>
 
@@ -274,9 +393,10 @@
             });
         </script>
     </nav>
+
+
     <!-- MAIN AREA -->
     <main>
-
         <style>
             .box {
                 height: 80%;
@@ -287,15 +407,30 @@
             }
 
             .box > main {
-                height: calc(100% - 110px);
+                height: 343px;
 
                 display: flex;
                 flex-direction: column;
-                justify-content: space-evenly;
+                /*justify-content: center;*/
                 align-items: center;
 
                 cursor: pointer;
                 transition: all .1s ease-in-out;
+
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+
+            .box > main::-webkit-scrollbar {
+                width: 0px;
+            }
+
+            .box > main > table {
+                width: 100%;
+            }
+
+            .dontGlow:hover {
+                background-color: var(--tertiary-color) !important;
             }
 
             .box > main:hover {
@@ -306,17 +441,17 @@
 
             #income {
                 background-color: var(--primary-color);
-                border: 1px #6cdb6c solid;
+                border: 1px var(--secondary-accent) solid;
             }
 
             #income > header, #income > footer {
-                background-color: #6cdb6c;
+                background-color: var(--secondary-accent);
                 width: 100%;
             }
 
             #income > header {
-                border-top-left-radius: 15px;
-                border-top-right-radius: 15px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
                 height: 80px;
 
                 display: flex;
@@ -328,8 +463,8 @@
             }
 
             #income > footer {
-                border-bottom-left-radius: 15px;
-                border-bottom-right-radius: 15px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
                 height: 30px;
             }
 
@@ -337,17 +472,17 @@
 
             #expenses {
                 background-color: var(--primary-color);
-                border: 1px #bd5555 solid;
+                border: 1px #c33737 solid;
             }
 
             #expenses > header, #expenses > footer {
-                background-color: #bd5555;
+                background-color: #c33737;
                 width: 100%;
             }
 
             #expenses > header {
-                border-top-left-radius: 15px;
-                border-top-right-radius: 15px;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
                 height: 80px;
 
                 display: flex;
@@ -359,20 +494,74 @@
             }
 
             #expenses > footer {
-                border-bottom-left-radius: 15px;
-                border-bottom-right-radius: 15px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
                 height: 30px;
             }
 
+            /* ---------------------------------------- */
 
+            #evaluationTable-expenses {
+                background-color: var(--primary-color);
+                border: 1px #c33737 solid;
+            }
+
+            #evaluationTable-expenses > tr {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #evaluationTable-expenses > tr > td.item-name {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+
+                width: 100%;
+                margin-left: 10px;
+            }
+
+            #evaluationTable-expenses > tr > td.item-price::after {
+                content: "$";
+                margin-left: 2px;
+            }
+
+            /* --- */
+
+            #evaluationTable-income {
+                background-color: var(--primary-color);
+                border: 1px var(--secondary-accent) solid;
+            }
+
+            #evaluationTable-income > tr {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #evaluationTable-income > tr > td.item-name {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+
+                width: 100%;
+                margin-left: 10px;
+            }
+
+            #evaluationTable-income > tr > td.item-price::after {
+                content: "$";
+                margin-left: 2px;
+            }
 
         </style>
 
+
+
         <div id="income" class="box">  
-            <header>
-                TOTAL
+            <header id="incomeTotal">
+                0 $
             </header>
-            <main>
+            <main id="income-data">
                 +
             </main>
             <footer>
@@ -381,10 +570,10 @@
         </div>
 
         <div id="expenses" class="box">
-            <header>
-                TOTAL
+            <header id="expensesTotal">
+                0 $
             </header>
-            <main>
+            <main id="expenses-data">
                 +
             </main>
             <footer>
@@ -392,8 +581,9 @@
             </footer>
         </div>
 
+
         <style>
-            #financeModal {
+            .financeModal {
                 width: 40%;
                 height: 70%;
 
@@ -407,19 +597,101 @@
 
                 box-shadow: 0px 0px 7px var(--tertiary-color);  
 
-                
+                display: flex;
+                flex-direction: column;
             }
 
-            #financeModal::-webkit-scrollbar {
+            .financeModal::-webkit-scrollbar {
                 width: 0px;
             }
 
-            #financeModal::backdrop  {
-                background-color: #191c1950;
+            .financeModal::backdrop  {
+                background-color: #00000090;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            
+            tr {
+                /*border: .1px solid #ffffff0a;*/
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                cursor: pointer;
+
+                transition: background-color .1s ease-in-out;
+            }
+
+            tr:hover {
+                background-color: #ffffff0a;
+            }
+
+
+            td {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+            }
+
+            .itemCell {
+                width: calc(100% - 180px);
+            }
+
+            .priceCell {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+
+                margin-right: 10px;
+
+                width: 80px;
+            }
+            .priceCell::after {
+                margin-left: 2px;
+                content: "$"
+            }
+            
+            .categoryRow {
+                height: 35px;
+
+                font-size: 20px;
+                font-style: italic;
+                font-weight: bold;
+
+                margin: 10px 0;
+                column-span: 3;
+
+                border-bottom: dashed 1px #ffffff;
+                border-top: dashed 1px #ffffff;
+            }
+            .categoryRow:hover {
+                background-color: transparent;
+                cursor: default;
             }
 
             .selected {
-                background-color: #79ff79a2;
+                background-color: #30963078;
+                border: .1px solid #0000000a;
+            }
+
+            .selected > td > input {
+                background-color: var(--tertiary-color);
+            }
+
+            .selected:hover {
+                background-color: #30963078;
+                border: .1px solid #0000000a;
+            }
+
+            td > input {
+                background-color: transparent;
+                border: 1px solid #ffffff67;
+                border-radius: 2px;
+                color: white;
+                width: 100px;
             }
         
             .priceless {
@@ -431,65 +703,37 @@
             let income = document.getElementById("income").childNodes[3];
             let expenses = document.getElementById("expenses").childNodes[3];
 
-            let financeModal = document.createElement('dialog')
-            financeModal.id = "financeModal";
-            document.body.appendChild(financeModal);
+            var incomeModal = document.createElement('dialog')
+            incomeModal.id = "incomeModal";
+            incomeModal.className = "financeModal";
+            document.body.appendChild(incomeModal);
+
+            var expensesModal = document.createElement('dialog')
+            expensesModal.id = "expensesModal";
+            expensesModal.className = "financeModal";
+            document.body.appendChild(expensesModal);
 
             const faction = 'CI';
-            var incomeData;
-            var expensesData;
 
             // SET CLICK EVENT AND GET DATA
 
+            
+
             income.addEventListener('click', (e) => {
                 
-                fetch('http://localhost:53134/API/GET',
-                    {   
-                        mode: "cors", // no-cors, *cors, same-origin
-                        credentials: "same-origin", // include, *same-origin, omit
-                        headers: {
-                            Accept: 'application.json',
-                            'Content-Type': 'application/json'
-                        },
-                        method: 'POST' ,
-                        body: JSON.stringify({
-                            faction: faction,
-                            file: 'revenue.json'
-                        }) 
-                    }).then(res => res.json())
-                    .then(data => {
-                        incomeData = data;
-                        financeModal.showModal();
-                    })
-                    .catch(err => console.log(err));
+                if (!document.getElementById("income-table")) {
+                    generateTable(incomeData, "income");
+                }
+                incomeModal.showModal();
             })
 
             expenses.addEventListener('click', (e) => {
                 
-                fetch('http://localhost:53134/API/GET',
-                    {   
-                        mode: "cors", // no-cors, *cors, same-origin
-                        credentials: "same-origin", // include, *same-origin, omit
-                        headers: {
-                            Accept: 'application.json',
-                            'Content-Type': 'application/json'
-                        },
-                        method: 'POST' ,
-                        body: JSON.stringify({
-                            faction: faction,
-                            file: 'expenses.json'
-                        }) 
-                    }).then(res => res.json())
-                    .then(data => {
-                        expensesData = data;
-                        generateTable(data);
-                        financeModal.showModal();
-                    })
-                    .catch(err => console.log(err));
+                if (!document.getElementById("expenses-table")) {
+                    generateTable(expenseData, "expenses");
+                }
+                expensesModal.showModal();
             })
-        </script>
-        <script>
-            console.log(Selection)
         </script>
     </main>
 

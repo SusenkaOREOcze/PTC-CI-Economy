@@ -178,9 +178,43 @@
     </header>
     <!-- BASIC INFO -->
     <section>
-        
+        <style>
+            section {
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
 
+                width: 100%;
+            }
 
+            #balance {
+                color: var(--primary-text);
+                font-size: 40px;
+                font-weight: 100;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+
+                justify-self: self-start;
+
+                margin-left: 50px;
+
+            }
+
+            #balance::before {
+                content: "Balance: ";
+            }
+
+            
+        </style>
+        <h1 id="balance">
+            361 000 $
+        </h1>
+
+        <script>
+
+        </script>
     </section>
     <!-- NAV LINKS -->
     <nav>
@@ -313,7 +347,7 @@
                 let userimg = document.getElementById("userimg");
                 let = userName = document.getElementById("username");
             
-                userName.innerHTML = `${user.username}#${user.discriminator}`;
+                userName.textContent = `${user.username}#${user.discriminator}`;
                 userimg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
         }
 

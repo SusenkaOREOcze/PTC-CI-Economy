@@ -282,9 +282,43 @@
     </header>
     <!-- BASIC INFO -->
     <section>
-        
+        <style>
+            section {
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
 
+                width: 100%;
+            }
 
+            #balance {
+                color: var(--primary-text);
+                font-size: 40px;
+                font-weight: 100;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+
+                justify-self: self-start;
+
+                margin-left: 50px;
+
+            }
+
+            #balance::before {
+                content: "Balance: ";
+            }
+
+            
+        </style>
+        <h1 id="balance">
+            361 000 $
+        </h1>
+
+        <script>
+
+        </script>
     </section>
 
     <!-- NAVIGATION -->
@@ -400,10 +434,10 @@
                 for (var category in data) {
                     var categoryContainer = document.createElement('div');
                     categoryContainer.className = 'category';
-                    categoryContainer.innerHTML = category;
+                    categoryContainer.textContent = category;
                     
                     categoryContainer.addEventListener('click', function(e) {
-                        var categoryItems = document.getElementsByClassName(`${e.target.innerHTML}`);
+                        var categoryItems = document.getElementsByClassName(`${e.target.textContent}`);
                         for (var element of categoryItems) {
                             if (element.style.height == '0px') {
                                 element.style.height = '50px';
@@ -423,10 +457,10 @@
                     var items = data[category];
                     for (var item in items) {
                         var row = document.createElement('div');
-                        row.className = 'item-row';
+                        row.className = `item-row ${category}`;
                         row.style.height = '0px';
                         row.style.overflow = 'hidden';
-                        row.classList.add(`${category}`);	
+                        //row.classList.add(`${category}`);	
                         
                         var itemCell = document.createElement('p');
                         itemCell.className = 'item';
@@ -438,15 +472,17 @@
                         priceCell.textContent = `${items[item]}x`;
                         row.appendChild(priceCell);
                         
-                        var buyBtn = document.createElement('button');
-                        buyBtn.className = 'buy-btn';
-                        buyBtn.textContent = 'Buy';
-                        row.appendChild(buyBtn);
-
-                        var sellBtn = document.createElement('button');
-                        sellBtn.className = 'sell-btn';
-                        sellBtn.textContent = 'Sell';
-                        row.appendChild(sellBtn);
+                        if (category != "Zkonfiskovaná SCP") {
+                            var buyBtn = document.createElement('button');
+                            buyBtn.className = 'buy-btn';
+                            buyBtn.textContent = 'Buy';
+                            row.appendChild(buyBtn);
+    
+                            var sellBtn = document.createElement('button');
+                            sellBtn.className = 'sell-btn';
+                            sellBtn.textContent = 'Sell';
+                            row.appendChild(sellBtn);
+                        }
                         
                         storageContainer.appendChild(row);
                     }

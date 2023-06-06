@@ -1,6 +1,6 @@
 {
-    "Death of personnel": {
-        "cost": 1000,
+    "Smrt personálu": {
+        "poplatek za člena": 1000,
 
         "assault-engineer": {
             "E-11": 1,
@@ -71,7 +71,7 @@
         }
     },
     
-    "Basic procedures and special functions": {
+    "Základní operace a speciální funkce": {
         "Chaos Insurgency AI": 7500,
         "Výplata": 500,
         "Údržba vozidel": 2500,
@@ -79,27 +79,27 @@
         "Transport: Dodávka": 20000,
         "Assault: 1-4 - přeprava Humvee": 12000,
         "Assault: 6 - přeprava Dodávkou": 18000,
-        "Assault: 8+ - přeprava Kamiónem/Konvojem - za každého člena": 2500
+        "Assault: 8+ - přeprava Kamiónem/Konvojem": 2500
     },
 
-    "Leak of information from captured personnel": {
-        "alpha": 1000,
-        "beta": 2500,
-        "gama": 5000,
-        "delta": 15000
+    "Únik informací od zajatého personálu": {
+        "Alpha": 1000,
+        "Beta": 2500,
+        "Gama": 5000,
+        "Delta": 15000
     },
 
-    "Infiltration of foundation personnel" : {
-        "lvl-1": 2000,
-        "lvl-2": 4000,
-        "lvl-3": 12000,
-        "lvl-4": 20000
+    "Infiltrace nadačního personálu" : {
+        "Úrovně 1": 2000,
+        "Úrovně 2": 4000,
+        "Úrovně 3": 12000,
+        "Úrovně 4": 20000
     },
 
-    "Smuggle of items/object in to facility": {
-        "LCZ-S": 1000,
-        "LCZ-L": 5000,
-        "HCZ-S": 2000,
-        "HCZ-L": 10000
+    "Propašování předmětu/ů do oblasti": {
+        "Light Containment Zone - S": 1000,
+        "Light Containment Zone - L": 5000,
+        "Heavy Containment Zone - S": 2000,
+        "Heavy Containment Zone - L": 10000
     }
 }

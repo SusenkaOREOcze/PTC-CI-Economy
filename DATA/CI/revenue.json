@@ -1,6 +1,35 @@
 {
-    "": {
-        
-
+    "Získané informace": {
+        "Informace o Safe SCP Subjektu": 2500,
+        "Informace o Euclid SCP Subjektu": 5000,
+        "Informace o Keter SCP Subjektu:": 7500,
+        "Informace o Thaumiel SCP Subjektu": 10000,
+        "Informace o Appolyon SCP Subjektu": 15000,
+        "Informace o celé oblasti": 35000
+    },
+    "Unesení personálu či subjektu": {
+        "Unesení personálu úrovně 1": 1000,
+        "Unesení personálu úrovně 2": 2500,
+        "Unesení personálu úrovně 3": 5000,
+        "Unesení personálu úrovně 4": 10000,
+        "Unesení personálu úrovně 5": 15000,
+        "Unesení Safe SCP Subjektu": 5000,
+        "Unesení Euclid SCP Subjektu": 10000,
+        "Unesení Keter SCP Subjektu": 15000
+    },
+    "Terminace personálu": {
+        "Terminace personálu úrovně 1": 500,
+        "Terminace personálu úrovně 2": 1000,
+        "Terminace personálu úrovně 3": 1500,
+        "Terminace personálu úrovně 4": 3000,
+        "Terminace personálu úrovně 5": 5000
+    },
+    "Ukradení techniky": {
+        "Ukradnutí MICRO H.I.D": 7500,
+        "Ukradnutí Particle Disruptoru": 10000
+    },
+    "Odpálená hlavice Alpha": {
+        "Částečné zavinění odpálení": 7500,
+        "Odpálená hlavice Alpha": 25000
     }
 }

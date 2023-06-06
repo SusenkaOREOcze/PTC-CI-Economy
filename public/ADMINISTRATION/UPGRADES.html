@@ -189,9 +189,43 @@
     </header>
     <!-- BASIC INFO -->
     <section>
-        
 
+        <style>
+            section {
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
 
+                width: 100%;
+            }
+
+            #balance {
+                color: var(--primary-text);
+                font-size: 40px;
+                font-weight: 100;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+
+                justify-self: self-start;
+
+                margin-left: 50px;
+
+            }
+
+            #balance::before {
+                content: "Balance: ";
+            }
+            
+        </style>
+        <h1 id="balance">
+            361 000 $
+        </h1>
+
+        <script>
+
+        </script>
     </section>
 
     <!-- NAVIGATION -->
@@ -243,7 +277,7 @@
         let userimg = document.getElementById("userimg");
         let = userName = document.getElementById("username");
 
-        userName.innerHTML = `${user.username}#${user.discriminator}`;
+        userName.textContent = `${user.username}#${user.discriminator}`;
         userimg.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
     </script>
 
@@ -271,10 +305,83 @@
     <!-- MAIN AREA -->
     <main>
 
+        <div id="upgrade-container">
 
+        </div>
+        <div id="bought-upgrades">
 
+        </div>
 
+        <script>
+            function submitFinance() {
 
+                let container = document.getElementById('upgrade-container');
+                
+                let table;
+                let selection
+            
+                container.innerHTML = '';
+                if (document.getElementById('evaluationTable-' + type)) {
+                    document.getElementById('evaluationTable-' + type).remove();
+                    container.classList.remove('dontGlow');
+                } else {
+                    container.classList.add('dontGlow');
+                }
+            
+                switch (type) {
+                    case 'expenses':
+                        if (expensesSelection.length == 0) {
+                            if (document.getElementById('evaluationTable-expenses')) {
+                                document.getElementById('evaluationTable-expenses').remove();
+                            }
+                            container.style.justifyContent = 'center';
+                            container.textContent = '+';
+                            return;
+                        }
+                        container.style.justifyContent = 'flex-start';
+                        table = document.createElement('table');
+                        table.id = 'evaluationTable-' + type;
+                        selection = expensesSelection;
+                        break;
+                    case 'income':
+                        if (incomeSelection.length == 0) {
+                            if (document.getElementById('evaluationTable-income')) {
+                                document.getElementById('evaluationTable-income').remove();
+                            }
+                            container.style.justifyContent = 'center';
+                            container.textContent = '+';
+                            return;
+                        }
+                        container.style.justifyContent = 'flex-start';
+                        table = document.createElement('table');
+                        table.id = 'evaluationTable-' + type;
+                        selection = incomeSelection;
+                        break;
+                    }
+            
+            
+                // Iterate through the data object
+                for (var item of selection) {
+            
+                    // Create table row
+                    var row = document.createElement('tr');
+                    var amountCell = document.createElement('td');
+                    amountCell.textContent = item.amount + 'x';
+                    row.appendChild(amountCell);
+                    var itemCell = document.createElement('td');
+                    itemCell.textContent = item.name;
+                    itemCell.classList.add('item-name');
+                    row.appendChild(itemCell);
+                    var priceCell = document.createElement('td');
+                    priceCell.textContent = Number(item.price) * Number(item.amount);
+                    priceCell.classList.add('item-price');
+                    row.appendChild(priceCell);
+                    table.appendChild(row);
+                }
+            
+                container.appendChild(table);
+            }
+        </script>
     </main>
 
     <!-- AUTH SCRIPT + USER DATA RETURN-->

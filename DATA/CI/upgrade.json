@@ -1,0 +1,13 @@
+{
+    "Vylepšení na vozidla": {
+        "Turret level 1 (20% šance na sestřelení nepřátel)": false,
+        "Turret level 2 (40% šance na sestřelení nepřátel)": false,
+        "Turret level 3 (60% šance na sestřelení nepřátel)": false,
+        "Turret level 4 (80% šance na sestřelení nepřátel)": false
+    },
+    "Hacking device": {
+        "Self-Dustruction disk": false,
+        "Možnost spuštění dekontaminace (60s)": false,
+        "Možnost spuštění dekontaminace (20s)": false
+    }
+}

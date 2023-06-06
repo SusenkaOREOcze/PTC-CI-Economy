@@ -69,6 +69,9 @@ app.post('/API/GET', (request, response) => {
 	})
 })
 
+app.post('/API/SESSION', (request, response) => {
+	
+});
 
 // START APP ON PORT AND SERVER FILES IN FOLDER: PUBLIC
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
